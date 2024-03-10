@@ -1,0 +1,97 @@
+# 公共配置文件
+spring:
+  application:
+    name: api-backend
+  # 默认 dev 环境
+  profiles:
+    active: dev
+  # 支持 swagger3
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # session 配置
+  session:
+    # todo 取消注释开启分布式 session（须先配置 Redis）
+    store-type: redis
+    # 30 天过期
+    timeout: 2592000
+  # 数据库配置
+  # todo 需替换配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://123123:3306/luckysj_api
+    username: root
+    password: 123123
+  # Redis 配置
+  # todo 需替换配置，然后取消注释
+  redis:
+    database: 1
+    host: 123123
+    port: 6379
+    timeout: 5000
+    password: 123123
+  #    password: 123456
+  # Elasticsearch 配置
+  # todo 需替换配置，然后取消注释
+  #  elasticsearch:
+  #    uris: http://localhost:9200
+  #    username: root
+  #    password: 123456
+  # 文件上传
+  servlet:
+    multipart:
+      # 大小限制
+      max-file-size: 10MB
+server:
+  address: 0.0.0.0
+  port: 8101
+  servlet:
+    context-path: /api
+    # cookie 30 天过期
+    session:
+      cookie:
+        max-age: 2592000
+        same-site: none
+        secure: true
+
+
+dubbo:
+  qos:
+    port: 33333
+  application:
+    #设置应用的名称
+    enable-file-cache: false
+    name: dubbo-springboot-luckysjapi-provider
+  #指定使用Dubbo协议，且端口设置为-1，表示随机分配可用端口
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    #配置注册中心为Nacos
+    id: nacos-registry
+    address: nacos://123123:8848
+    username: nacos
+    password: 123123
+    parameters:
+      namespace: 52a0dfe9-8e59-4851-a4a7-089aa14d5694   #nacos命名空间
+    group: luckysj-api    #nacos分组
+  config-center:
+    timeout: 40000
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: is_delete # 全局逻辑删除的实体字段名
+      logic-delete-value: 1 # 逻辑已删除值（默认为 1）
+      logic-not-delete-value: 0 # 逻辑未删除值（默认为 0）
+
+# 腾讯云cos对象存储
+cos:
+  client:
+    accessKey: "123123"
+    secretKey: "123123"
+    region: "ap-nanjing"
+    bucket: "api-1314434715"

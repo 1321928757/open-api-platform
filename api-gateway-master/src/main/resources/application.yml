@@ -1,0 +1,38 @@
+server:
+  port: 8102
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: path_route
+          uri: http://123123:8123/api
+          predicates:
+            - Path=/api/**
+dubbo:
+  application:
+    #设置应用的名称
+    name: dubbo-springboot-consumer
+    qos-enable: true
+    qos-accept-foreign-ip: false
+  #指定使用Dubbo协议，且端口设置为-1，表示随机分配可用端口
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    #配置注册中心为Nacos
+    id: nacos-registry
+    address: nacos://123123:8848
+    username: nacos
+    password: 123123
+    parameters:
+      namespace: 123123  #nacos命名空间
+    group: 123123   #nacos分组
+  config-center:
+    timeout: 40000
+#设置日志级别
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace
