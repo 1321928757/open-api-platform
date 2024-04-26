@@ -6,7 +6,7 @@
 
 ---
 
->**作者**：LuckySJ-刘仕杰 - 在线演示地址 [**www.luckylottery.site**](www.luckylottery.site)
+>**作者**：LuckySJ-刘仕杰 - 在线演示地址 [**www.ttapi.site**](http://www.ttapi.site/)
 
 ## 运行配置
 
